@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>S.I.T. Space</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="logos">
+        <div class="logo">Л1</div>
+        <div class="logo">Л2</div>
+    </div>
+    <div>S.I.T. Space</div>
+</header>
+
+<section>
+<h2>Информация о спутнике</h2>
+<div class="card">
+    <div class="buttons">
+        <button onclick="showPhoto()">Фото спутника</button>
+        <button onclick="showOrbit()">Симуляция орбиты</button>
+    </div>
+    <div id="viewer" class="viewer">Фото спутника</div>
+
+    <p><b>Название:</b> S.I.T - 1</p>
+    <p><b>Дата запуска:</b> Ещё не запущен</p>
+    <p><b>Орбита:</b> Низкая околоземная</p>
+    <p><b>Высота:</b> 540 км</p>
+    <p><b>Статус:</b> Разработка</p>
+</div>
+</section>
+
+<section>
+<h2>Снимки со спутника</h2>
+<div class="card">
+    <div id="photo" class="gallery-photo fade-in">Снимок 1</div>
+
+    <div class="gallery-controls">
+        <div onclick="prevPhoto()">← Предыдущее</div>
+        <div onclick="nextPhoto()">Следующее →</div>
+    </div>
+</div>
+</section>
+
+<section>
+<h2>Данные датчиков</h2>
+<div class="charts">
+    <div class="card"><canvas id="tempIn"></canvas></div>
+    <div class="card"><canvas id="tempOut"></canvas></div>
+    <div class="card"><canvas id="voltage"></canvas></div>
+    <div class="card"><canvas id="radiation"></canvas></div>
+</div>
+</section>
+
+<script src="{{ url_for('static', filename='js/space.js') }}"></script>
+
+</body>
+</html>

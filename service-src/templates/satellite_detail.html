@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ satellite.name }} - SIT-Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/satellite_detail.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="CubeSat Logo">
+            <h2>SIT-Space</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link"><i class="fas fa-home"></i> Панель</a></li>
+            <li class="nav-item"><a href="{{ url_for('profile') }}" class="nav-link"><i class="fas fa-user"></i> Профиль</a></li>
+            <li class="nav-item"><a href="{{ url_for('analytics') }}" class="nav-link"><i class="fas fa-chart-line"></i> Аналитика</a></li>
+            {% if session.get('username') == 'admin' %}
+            <li class="nav-item"><a href="#" class="nav-link" onclick="openConfigModal()"><i class="fas fa-cog"></i> Конфигурация</a></li>
+            {% endif %}
+            {% if session.get('username') %}
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <a href="{{ url_for('dashboard') }}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Назад к панели
+        </a>
+
+        <div class="satellite-header">
+            <div class="satellite-image">
+                <img src="/static/images/{{ satellite.image }}" alt="{{ satellite.name }}">
+            </div>
+            <div class="satellite-info">
+                <h1 class="satellite-title">{{ satellite.name }}</h1>
+                <span class="satellite-status status-{{ satellite.status.lower() }}">{{ satellite.status }}</span>
+                <p class="satellite-description">{{ satellite.description }}</p>
+            </div>
+        </div>
+
+        <div class="detail-cards">
+            <div class="detail-card">
+                <h3>Основная информация</h3>
+                <div class="detail-item">
+                    <span class="detail-label">ID спутника</span>
+                    <span class="detail-value">{{ satellite.id }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Миссия</span>
+                    <span class="detail-value">{{ satellite.mission }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Дата запуска</span>
+                    <span class="detail-value">{{ satellite.launch_date }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Последний контакт</span>
+                    <span class="detail-value">{{ satellite.last_contact }}</span>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <h3>Технические характеристики</h3>
+                <div class="detail-item">
+                    <span class="detail-label">Габариты</span>
+                    <span class="detail-value">10 × 10 × 10 см (1U)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Масса</span>
+                    <span class="detail-value">1.0 кг</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Питание</span>
+                    <span class="detail-value">2Вт (солнечные панели 1U)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Связь</span>
+                    <span class="detail-value">UHF/VHF</span>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Данные телеметрии</h3>
+        <div class="detail-card">
+            <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: #999;">
+                <div style="text-align: center;">
+                    <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <p>Данные телеметрии в реальном времени будут отображены здесь</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Фотогалерея со спутника</h3>
+        <div class="detail-card">
+            <div class="photo-gallery">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="/static/images/{{ satellite.image }}" alt="{{ satellite.name }} - Основное изображение" class="gallery-photo">
+                        <div class="photo-caption">{{ satellite.name }} - Основное изображение</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="configModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Конфигурация спутника</h3>
+                <span class="close" onclick="closeConfigModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="satelliteSelect">Выберите спутник:</label>
+                    <select id="satelliteSelect" class="form-control">
+                        <option value="1">SITeye-1</option>
+                        <option value="2">SITeye-2</option>
+                        <option value="3">SITeye-3</option>
+                        <option value="4">SITeye-4</option>
+                        <option value="5">SITeye-5</option>
+                        <option value="6">SITeye-6</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rotationX">Поворот по оси X (-180° до +180°):</label>
+                    <input type="number" id="rotationX" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rotationY">Поворот по оси Y (-180° до +180°):</label>
+                    <input type="number" id="rotationY" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rotationZ">Поворот по оси Z (-180° до +180°):</label>
+                    <input type="number" id="rotationZ" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button onclick="applyConfiguration()" class="btn btn-primary">Применить</button>
+                    <button onclick="closeConfigModal()" class="btn">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/satellite_detail.js') }}"></script>
+</body>
+</html>

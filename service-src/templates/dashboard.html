@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления - SIT-Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <button class="toggle-sidebar" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="CubeSat Logo">
+            <h2>SIT-Space</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link active"><i class="fas fa-home"></i> Панель</a></li>
+            <li class="nav-item"><a href="{{ url_for('profile') }}" class="nav-link"><i class="fas fa-user"></i> Профиль</a></li>
+            <li class="nav-item"><a href="{{ url_for('analytics') }}" class="nav-link"><i class="fas fa-chart-line"></i> Аналитика</a></li>
+            {% if session.get('username') == 'admin' %}
+            <li class="nav-item"><a href="#" class="nav-link" onclick="openConfigModal()"><i class="fas fa-cog"></i> Конфигурация</a></li>
+            {% endif %}
+            {% if session.get('username') %}
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Панель управления спутниками</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i> Обновить
+                </button>
+                {% if session.get('username') == 'admin' %}
+                <button class="btn btn-primary" onclick="openConfigModal()">
+                    <i class="fas fa-cog"></i> Конфигурация
+                </button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="satellites-grid" id="satellitesGrid">
+        </div>
+    </div>
+
+    <div class="modal" id="configModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Конфигурация спутника</h3>
+                <span class="close" onclick="closeConfigModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="satelliteSelect">Выберите спутник:</label>
+                    <select id="satelliteSelect" class="form-control">
+                        <option value="1">SITeye-1</option>
+                        <option value="2">SITeye-2</option>
+                        <option value="3">SITeye-3</option>
+                        <option value="4">SITeye-4</option>
+                        <option value="5">SITeye-5</option>
+                        <option value="6">SITeye-6</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rotationX">Поворот по оси X (-180° до +180°):</label>
+                    <input type="number" id="rotationX" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rotationY">Поворот по оси Y (-180° до +180°):</label>
+                    <input type="number" id="rotationY" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rotationZ">Поворот по оси Z (-180° до +180°):</label>
+                    <input type="number" id="rotationZ" min="-180" max="180" value="0" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="applyConfiguration()">Применить</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeConfigModal()">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

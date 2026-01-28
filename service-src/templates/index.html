@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT-Space - Сеть автономных спутников</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SIT-Space</h1>
+            <p class="subtitle">Сеть автономных спутников</p>
+            <p class="description">
+                Инновационная система спутниковой связи для дистанционного зондирования Земли. 
+                Наша сеть из шести спутников формата 1U обеспечивает глобальное покрытие 
+                и сбор данных в реальном времени.
+            </p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('login') }}" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Войти в панель управления
+                </a>
+                <a href="https://github.com/your-username/cubesat-network" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> Исходный код
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="satellite-section">
+        <h2>Технологии будущего</h2>
+        <p class="satellite-description">
+            Каждый спутник SITeye формата 1U оснащен передовыми системами наблюдения,
+            имеет солнечные панели для автономной работы и систему ориентации 
+            для точного наведения на цели наблюдения.
+        </p>
+        <img src="../static/images/4.png" alt="CubeSat Спутник" class="satellite-image">
+        <p class="satellite-description">
+            Наша сеть обеспечивает глобальное покрытие с орбитой высотой 500-600 км, 
+            позволяя собирать данные с любой точки Земли каждые 90 минут.
+        </p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SIT-Space - Инновации в спутниковых технологиях</p>
+            <a href="https://github.com/your-username/cubesat-network" target="_blank" class="github-link">
+                <i class="fab fa-github"></i> Исходный код на GitHub
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

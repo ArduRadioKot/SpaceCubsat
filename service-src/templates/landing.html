@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CubeSat Network - Сеть автономных спутников</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing_old.css') }}">
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>CubeSat Network</h1>
+            <p class="subtitle">Сеть автономных спутников</p>
+            <p class="description">
+                Инновационная система спутниковой связи для дистанционного зондирования Земли. 
+                Наша сеть из шести CubeSat спутников обеспечивает непрерывный мониторинг 
+                и сбор данных в реальном времени.
+            </p>
+            <a href="{{ url_for('login') }}" class="cta-button">
+                <i class="fas fa-sign-in-alt"></i> Войти в систему
+            </a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-container">
+            <h2>Возможности системы</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Автономная сеть</h3>
+                    <p>Шесть спутников работающих в координации для обеспечения непрерывного покрытия</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Дистанционное зондирование</h3>
+                    <p>Высокоточная съемка поверхности Земли в реальном времени</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Аналитика данных</h3>
+                    <p>Обработка и визуализация телеметрии и данных сенсоров</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Безопасная связь</h3>
+                    <p>Шифрованные каналы передачи данных и управления</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Удаленная конфигурация</h3>
+                    <p>Изменение параметров спутников в реальном времени</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3>Энергоэффективность</h3>
+                    <p>Оптимизированное энергопотребление и управление батареями</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="satellite-section">
+        <div class="satellite-container">
+            <h2>Наши спутники</h2>
+            <p class="satellite-description">
+                CubeSat - это стандартизированные миниатюрные спутники формата 3U, 
+                оснащенные современными сенсорами и системами связи. Каждый спутник 
+                имеет солнечные панели для автономной работы и систему ориентации 
+                для точного наведения на цели наблюдения.
+            </p>
+            <img src="../static/images/4.png" 
+                 alt="CubeSat Спутник" class="satellite-image">
+            <p class="satellite-description">
+                Наша сеть обеспечивает глобальное покрытие с орбитой высотой 500-600 км, 
+                позволяя собирать данные с любой точки Земли каждые 90 минут.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>CubeSat Network - Инновации в спутниковых технологиях</p>
+            <a href="https://github.com/your-username/cubesat-network" target="_blank" class="github-link">
+                <i class="fab fa-github"></i> Исходный код на GitHub
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

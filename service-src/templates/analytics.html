@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аналитика - SIT-Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analytics.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="CubeSat Logo">
+            <h2>SIT-Space</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link"><i class="fas fa-home"></i> Панель</a></li>
+            <li class="nav-item"><a href="{{ url_for('profile') }}" class="nav-link"><i class="fas fa-user"></i> Профиль</a></li>
+            <li class="nav-item"><a href="{{ url_for('analytics') }}" class="nav-link active"><i class="fas fa-chart-line"></i> Аналитика</a></li>
+            {% if session.get('username') == 'admin' %}
+            <li class="nav-item"><a href="#" class="nav-link" onclick="parent.openConfigModal()"><i class="fas fa-cog"></i> Конфигурация</a></li>
+            {% endif %}
+            {% if session.get('username') %}
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="coming-soon">
+            <div class="coming-soon-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h1>Аналитика</h1>
+            <p>Раздел аналитики находится в разработке</p>
+            
+            <ul class="features-list">
+                <li><i class="fas fa-check"></i> Графики телеметрии в реальном времени</li>
+                <li><i class="fas fa-check"></i> Статистика работы спутников</li>
+                <li><i class="fas fa-check"></i> Анализ эффективности миссии</li>
+                <li><i class="fas fa-check"></i> Отчеты о покрытии территории</li>
+                <li><i class="fas fa-check"></i> Мониторинг энергопотребления</li>
+                <li><i class="fas fa-check"></i> Прогнозирование и предупреждения</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

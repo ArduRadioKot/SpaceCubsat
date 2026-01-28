@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - SIT-Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="CubeSat Logo">
+            <h2>SIT-Space</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link"><i class="fas fa-home"></i> Панель</a></li>
+            <li class="nav-item"><a href="{{ url_for('profile') }}" class="nav-link active"><i class="fas fa-user"></i> Профиль</a></li>
+            <li class="nav-item"><a href="{{ url_for('analytics') }}" class="nav-link"><i class="fas fa-chart-line"></i> Аналитика</a></li>
+            {% if session.get('username') == 'admin' %}
+            <li class="nav-item"><a href="#" class="nav-link" onclick="openConfigModal()"><i class="fas fa-cog"></i> Конфигурация</a></li>
+            {% endif %}
+            {% if session.get('username') %}
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1 class="profile-title">{{ session.get('username', 'Гость') }}</h1>
+            <p class="profile-subtitle">Оператор спутниковой сети</p>
+        </div>
+
+        <div class="profile-grid">
+            <div class="profile-card">
+                <div class="card-icon">
+                    <i class="fas fa-satellite"></i>
+                </div>
+                <h2 class="card-title">Управление спутниками</h2>
+                <div class="card-content">
+                    <p>Мониторинг и управление сетью из 6 спутников SITeye формата 1U. Отслеживание телеметрии и конфигурация систем.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">Спутников</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Доступность</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="card-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h2 class="card-title">Зона покрытия</h2>
+                <div class="card-content">
+                    <p>Глобальное покрытие с орбитой высотой 500-600 км. Сбор данных с любой точки Земли каждые 90 минут.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">520</div>
+                            <div class="stat-label">Высота (км)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">90</div>
+                            <div class="stat-label">Период (мин)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="card-title">Активность</h2>
+                <div class="card-content">
+                    <p>История последних действий и операций с системой спутников.</p>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Просмотр данных телеметрии</div>
+                                <div class="activity-time">2 минуты назад</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Конфигурация спутника</div>
+                                <div class="activity-time">1 час назад</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Проверка статуса сети</div>
+                                <div class="activity-time">3 часа назад</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
